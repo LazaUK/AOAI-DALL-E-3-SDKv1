@@ -28,7 +28,7 @@ client = AzureOpenAI(
     azure_endpoint = AOAI_API_BASE,
 )
 ```
-2. We define then a helper function, that would call deployment name of our DALL-E 3 model in Azure OpenAI and return URL of generated image.
+2. We define then a helper function, that would call our DALL-E 3 model in Azure OpenAI and return URL of generated image.
 ``` Python
 def image_generator(prompt):
     # Generate image with DALL-E 3
@@ -42,8 +42,8 @@ def image_generator(prompt):
     image_url = json_response["data"][0]["url"]
     return image_url
 ```
-3. We can then call our helper function with our image prompt, e.g. "Caricature picture of Mickey Mouse with a hat"
-4. If successful, we should be able to download our image with _Pillow_ and visualise in default graphic editor.
+3. We can then execute our helper function with an image prompt, e.g. "Caricature picture of Mickey Mouse with a hat"
+4. If successful, we should be able to download generated image with _Pillow_ and visualise it in default graphic editor.
 ``` Python
 image = Image.open(requests.get(image_url, stream=True).raw)
 image.show()
