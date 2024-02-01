@@ -8,7 +8,7 @@ pip install --upgrade openai
 
 ## Table of contents:
 - [Part 1: Configuring solution environment](https://github.com/LazaUK/AOAI-DALL-E-3-SDKv1/tree/main?tab=readme-ov-file#part-1-configuring-solution-environment)
-- [Part 2: Generating and visualising required image]()
+- [Part 2: Generating and visualising required image](https://github.com/LazaUK/AOAI-DALL-E-3-SDKv1/tree/main?tab=readme-ov-file#part-2-generating-and-visualising-required-image)
 
 ## Part 1: Configuring solution environment
 1. To use API key authentication, assign the API endpoint name, version and key, along with the Azure OpenAI deployment name of DALL-E 3 model to **OPENAI_API_BASE**, **OPENAI_API_VERSION**, **OPENAI_API_KEY** and **OPENAI_API_DEPLOY_DALLE** environment variables respectively.
