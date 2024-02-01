@@ -42,7 +42,7 @@ def image_generator(prompt):
     image_url = json_response["data"][0]["url"]
     return image_url
 ```
-3. We can call then our helper function with our image prompt, e.g. "Caricature picture of a Mickey Mouse with a hat".
+3. We can then call our helper function with our image prompt, e.g. "Caricature picture of Mickey Mouse with a hat"
 4. If successful, we should be able to download our image with _Pillow_ and visualise in default graphic editor.
 ``` Python
 image = Image.open(requests.get(image_url, stream=True).raw)
