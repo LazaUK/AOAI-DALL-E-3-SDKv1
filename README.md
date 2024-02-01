@@ -1,7 +1,7 @@
 # Image generation with Azure OpenAI DALL-E 3
-DALL-E 3 is a Generative AI model from OpenAI, which can be used to generate images based on your textual input (prompt). You will find a Jupyter notebook in this repo, that can utilise Azure OpenAI deployment of DALL-E 3 to generate caricature image of a famous Disney character.
+DALL-E 3 is a Generative AI model from OpenAI, which can produce images based on your textual input (prompt). You will find a Jupyter notebook in this repo, that utilises Azure OpenAI deployment of DALL-E 3 to generate caricature image of a famous Disney character.
 
-To build this demo, I used the latest OpenAI Python SDK v1.x. To upgrade your _openai_ Python package, please use the following pip command:
+To build this demo, I used the latest version of OpenAI Python SDK - v1.x. To upgrade your _openai_ Python package, please use the following pip command:
 ```
 pip install --upgrade openai
 ```
@@ -20,5 +20,33 @@ pip install -r requirements.txt
 ```
 
 ## Part 2: Generating and visualising required image
-
+1. Connection with the backend Azure OpenAI service is established through the _openai_ Python SDK v1. Current implementation passes the Azure OpenAI endpoint's API key as a parameter value of the AzureOpenAI class. If necessary, you can switch to the Entra ID authentication instead.
+``` Python
+client = AzureOpenAI(
+    api_version = AOAI_API_VERSION,
+    api_key = AOAI_API_KEY,
+    azure_endpoint = AOAI_API_BASE,
+)
+```
+2. We define then a helper function, that would call deployment name of our DALL-E 3 model in Azure OpenAI and return URL of generated image.
+``` Python
+def image_generator(prompt):
+    # Generate image with DALL-E 3
+    response = client.images.generate(
+        model = AOAI_DEPLOYMENT,
+        prompt = prompt,
+    )
+    
+    # Extract image URL
+    json_response = json.loads(response.model_dump_json())
+    image_url = json_response["data"][0]["url"]
+    return image_url
+```
+3. We can call then our helper function with our image prompt, e.g. "Caricature picture of a Mickey Mouse with a hat".
+4. If successful, we should be able to download our image with _Pillow_ and visualise in default graphic editor.
+``` Python
+image = Image.open(requests.get(image_url, stream=True).raw)
+image.show()
+```
+5. Below is an example from my run. Your output may look different. 
 ![dalle3_image](/images/dalle3_generated.png)
